@@ -15,12 +15,12 @@ type NoteType = {
 
 const Notes = (props: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [noteId, setNoteId] = useState<number>();
+    const [noteId, setNoteId] = useState<number>(0);
     const [notes, setNotes] = useState<NoteType[]>();
 
     const closeEditor = () => {
         setIsOpen(false);
-        setNoteId(undefined);
+        setNoteId(0);
 
     }
 

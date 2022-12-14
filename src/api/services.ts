@@ -25,6 +25,20 @@ export const getNotes = async (): Promise<NoteType[]> => {
 }
 
 // Get a Note
+export const getNote = async (noteId:number): Promise<NoteType> => {
+    const response = await axios.get('/notes/'+ noteId, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log(response.data.data);
+        return response;
+    }).catch((error) => {
+        console.error(error);
+    })
+
+    return response?.data.data;
+}
 
 // Update a Note
 
