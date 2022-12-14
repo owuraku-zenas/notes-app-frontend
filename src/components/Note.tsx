@@ -10,7 +10,8 @@ import React from 'react'
 
 
 type Props = {
-    note: NoteType
+    note: NoteType,
+    openEditor: Function
 }
 
 const Note = (props: Props) => {
@@ -30,7 +31,7 @@ const Note = (props: Props) => {
                     </p>
                 </div>
                 <div className='px-2 pb-2 flex flex-col gap-2 justify-between md:flex-row'>
-                    <button className='px-6 py-2 bg-blue-400 rounded-sm text-gray-50 font-semibold'>Edit</button>
+                    <button className='px-6 py-2 bg-blue-400 rounded-sm text-gray-50 font-semibold' onClick={() => props.openEditor(props.note.id)} >Edit</button>
                     <button className='px-6 py-2 bg-red-500 rounded-sm text-gray-50 font-semibold'>Delete</button>
                 </div>
             </div>

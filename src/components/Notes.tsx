@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Editor from './Editor'
 import Note from './Note'
 import { getNotes } from './../api/services'
 
@@ -13,11 +14,24 @@ type NoteType = {
 }
 
 const Notes = (props: Props) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [noteId, setNoteId] = useState<number>();
     const [notes, setNotes] = useState<NoteType[]>();
 
+    const closeEditor = () => {
+        setIsOpen(false);
+        setNoteId(undefined);
+
+    }
+
+
+    const openEditor = (id: number) => {
+        setIsOpen(true);
+        setNoteId(id);
+    }
+
     useEffect(() => {
-        const response = getNotes().then(
+        getNotes().then(
             result => {
                 setNotes(result)
             }
@@ -31,11 +45,10 @@ const Notes = (props: Props) => {
     return (
         <>
             <div className='py-2 px-4 flex flex-col gap-4'>
-                {/* <Note /> */}
-                {        
+                {
                     notes ?
                     notes.map((note : NoteType) => (
-                        <Note note={note} key={note.id} />
+                        <Note note={note} key={note.id} openEditor={openEditor} />
                     )) :
                     null
                 }
@@ -43,7 +56,11 @@ const Notes = (props: Props) => {
                     <button className='w-full bg-blue-400 p-2 rounded-md text-white font-bold text-lg shadow-md'>Create Note</button>
                 </div>
             </div>
-
+            {
+                isOpen && (
+                    <Editor noteId={noteId} closeEditor={closeEditor} />
+                )
+            }
         </>
     )
 }

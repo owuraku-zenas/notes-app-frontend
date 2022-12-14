@@ -1,6 +1,9 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    noteId : number | undefined,
+    closeEditor: Function
+}
 
 const Editor = (props: Props) => {
     return (
@@ -8,7 +11,7 @@ const Editor = (props: Props) => {
             <div className='bg-white w-full max-w-[1000px] h-full md:h-[600px]  md:rounded-md'>
                 <header className=' px-4 py-1 flex items-center justify-between bg-blue-200 md:rounded-t-md'>
                     <h2 className='text-xl font-semibold'>Editor</h2>
-                    <span className='flex justify-center items-center p-2 font-semibold text-2xl text-red-600'>
+                    <span className='cursor-pointer flex justify-center items-center p-2 font-semibold text-2xl text-red-600' onClick={() => props.closeEditor() }>
                         x
                     </span>
                 </header>
