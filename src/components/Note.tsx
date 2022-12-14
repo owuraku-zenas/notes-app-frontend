@@ -1,4 +1,5 @@
 import React from 'react'
+import { deleteNote } from '../api/services'
 
     type NoteType = {
     id: number,
@@ -11,7 +12,8 @@ import React from 'react'
 
 type Props = {
     note: NoteType,
-    openEditor: Function
+    openEditor: Function,
+    noteDelete: Function
 }
 
 const Note = (props: Props) => {
@@ -32,7 +34,7 @@ const Note = (props: Props) => {
                 </div>
                 <div className='px-2 pb-2 flex flex-col gap-2 justify-between md:flex-row'>
                     <button className='px-6 py-2 bg-blue-400 rounded-sm text-gray-50 font-semibold' onClick={() => props.openEditor(props.note.id)} >Edit</button>
-                    <button className='px-6 py-2 bg-red-500 rounded-sm text-gray-50 font-semibold'>Delete</button>
+                    <button className='px-6 py-2 bg-red-500 rounded-sm text-gray-50 font-semibold' onClick={() => {props.noteDelete(props.note.id)}} >Delete</button>
                 </div>
             </div>
   )

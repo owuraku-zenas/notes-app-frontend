@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Editor from './Editor'
 import Note from './Note'
-import { getNotes } from './../api/services'
+import { deleteNote, getNotes } from './../api/services'
 
 type Props = {}
 
@@ -30,6 +30,17 @@ const Notes = (props: Props) => {
         setNoteId(id);
     }
 
+    const noteDelete = (id: number) => {
+        deleteNote(id).then(
+            result => {
+                console.log(result);
+                getNotes().then(
+                    result => setNotes(result)
+                )
+            }
+        )
+    }
+
     useEffect(() => {
         getNotes().then(
             result => {
@@ -48,7 +59,7 @@ const Notes = (props: Props) => {
                 {
                     notes ?
                     notes.map((note : NoteType) => (
-                        <Note note={note} key={note.id} openEditor={openEditor} />
+                        <Note note={note} key={note.id} openEditor={openEditor} noteDelete={noteDelete} />
                     )) :
                     null
                 }

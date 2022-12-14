@@ -43,3 +43,17 @@ export const getNote = async (noteId:number): Promise<NoteType> => {
 // Update a Note
 
 // Delete a Note
+export const deleteNote = async (noteId:number): Promise<NoteType> => {
+    const response = await axios.delete('/notes/'+ noteId, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log(response.data.data);
+        return response;
+    }).catch((error) => {
+        console.error(error);
+    })
+
+    return response?.data.data;
+}
