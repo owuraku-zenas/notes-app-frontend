@@ -17,6 +17,7 @@ type NoteType = {
 const Editor = (props: Props) => {
     const [title, setTitle] = useState<string>();
     const [description, setDescription] = useState<string>();
+    const [response, setResponse] = useState<string>();
 
     useEffect(() => {
         getNote(props.noteId).then(
@@ -47,7 +48,7 @@ const Editor = (props: Props) => {
                     />
                     <textarea className='border-2 w-full text-md p-3 rounded-lg md:h-[400px] h-[600px]' value={description} placeholder='Take Notes...' />
                 {/* <p className='px-2 text-gray-500 font-bold'>Saving . . .</p> */}
-                <p className='px-4 text-gray-500 font-bold'>Saved</p>
+                <p className='px-4 text-gray-500 font-bold'>{response}</p>
                 </form>
             </div>
         </div>
