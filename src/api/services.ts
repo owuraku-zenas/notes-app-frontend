@@ -91,3 +91,23 @@ export const deleteNote = async (noteId:number): Promise<NoteType> => {
 
     return response?.data.data;
 }
+
+// Create Note
+export const createNote = async (title:string, description: string|null = null): Promise<NoteType> => {
+    const response: Promise<NoteType> = await axios.post('/notes',{
+        title: title,
+        description: description
+    }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        console.log(response.data.data);
+        return response?.data.data;
+    })
+    .catch((error) => {
+        return error.response;
+    })
+
+    return response;
+}
