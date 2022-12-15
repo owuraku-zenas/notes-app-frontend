@@ -73,11 +73,11 @@ const Editor = (props: Props) => {
                         required
                         className='border-2 w-full text-lg p-3 rounded-lg'
                         type="text"
-                        placeholder='Title Loading...'
+                        placeholder='Note Title'
                         value={title}
                         onChange={(event) => setTitle(event.target.value.trimStart())}
                     />
-                    <textarea className='border-2 w-full text-md p-3 rounded-lg md:h-[400px] h-[600px]' value={description} placeholder='Notes Loading...' onChange={(event) => setDescription(event.target.value)} />
+                    <textarea className='border-2 w-full text-md p-3 rounded-lg md:h-[400px] h-[600px]' value={description} placeholder='Important Notes' onChange={(event) => setDescription(event.target.value)} />
                     {/* <p className='px-2 text-gray-500 font-bold'>Saving . . .</p> */}
                     <p className='px-4 text-gray-500 font-bold'>{response}</p>
                 </div>
