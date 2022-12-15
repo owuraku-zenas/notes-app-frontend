@@ -21,6 +21,7 @@ const Notes = (props: Props) => {
     const closeEditor = () => {
         setIsOpen(false);
         setNoteId(0);
+        location.reload();
 
     }
 
