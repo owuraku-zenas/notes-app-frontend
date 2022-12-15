@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Editor from './Editor'
 import Note from './Note'
-import { deleteNote, getNotes } from './../api/services'
+import { createNote, deleteNote, getNotes } from './../api/services'
 
 type Props = {}
 
@@ -42,6 +42,17 @@ const Notes = (props: Props) => {
         )
     }
 
+    const noteCreate = () => {
+        let noteNumber: number = Number(notes?.length) +1
+        const title = "Note " + noteNumber
+        createNote(title).then(
+            result => {
+                console.log(result);
+                openEditor(result.id)
+            }
+        )
+    }
+
     useEffect(() => {
         getNotes().then(
             result => {
@@ -65,7 +76,7 @@ const Notes = (props: Props) => {
                     null
                 }
                 <div className='w-full flex items-center justify-center'>
-                    <button className='w-full bg-blue-400 p-2 rounded-md text-white font-bold text-lg shadow-md'>Create Note</button>
+                    <button className='w-full bg-blue-400 p-2 rounded-md text-white font-bold text-lg shadow-md' onClick={noteCreate}>Create Note</button>
                 </div>
             </div>
             {
