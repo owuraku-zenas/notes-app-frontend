@@ -21,7 +21,6 @@ const Notes = (props: Props) => {
     const closeEditor = () => {
         setIsOpen(false);
         setNoteId(0);
-        location.reload();
 
     }
 
@@ -29,6 +28,7 @@ const Notes = (props: Props) => {
     const openEditor = (id: number) => {
         setIsOpen(true);
         setNoteId(id);
+        setNotes(undefined)
     }
 
     const noteDelete = (id: number) => {
@@ -43,7 +43,7 @@ const Notes = (props: Props) => {
     }
 
     const noteCreate = () => {
-        let noteNumber: number = Number(notes?.length) +1
+        let noteNumber: number = Number(notes?.length) + 1
         const title = "Note " + noteNumber
         createNote(title).then(
             result => {
@@ -56,24 +56,27 @@ const Notes = (props: Props) => {
     useEffect(() => {
         getNotes().then(
             result => {
-                setNotes(result)
+                setNotes(result);
             }
         )
 
         console.log(notes);
-        
-    }, [])
+
+    }, [isOpen])
 
 
     return (
         <>
             <div className='py-2 px-4 flex flex-col gap-4'>
                 {
-                    notes ?
-                    notes.map((note : NoteType) => (
-                        <Note note={note} key={note.id} openEditor={openEditor} noteDelete={noteDelete} />
-                    )) :
-                    null
+                    notes?.length != 0 ?
+                        notes?.map((note: NoteType) => (
+                            <Note note={note} key={note.id} openEditor={openEditor} noteDelete={noteDelete} />
+                        )) :
+                        <div className='bg-white shadow-lg flex flex-col gap-5 rounded-md w-full items-center justify-center p-10'>
+                            <p className='text-8xl'>📝</p>
+                            <h2 className='text-gray-500'>Create Notes</h2>
+                        </div>
                 }
                 <div className='w-full flex items-center justify-center'>
                     <button className='w-full bg-blue-400 p-2 rounded-md text-white font-bold text-lg shadow-md' onClick={noteCreate}>Create Note</button>
