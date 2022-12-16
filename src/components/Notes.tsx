@@ -21,14 +21,18 @@ const Notes = (props: Props) => {
     const closeEditor = () => {
         setIsOpen(false);
         setNoteId(0);
+        document.body.style.overflow = "auto"
 
     }
 
 
     const openEditor = (id: number) => {
+        window.scrollTo({
+            top: 0
+        })
+        document.body.style.overflow = "hidden"
         setIsOpen(true);
         setNoteId(id);
-        setNotes(undefined)
     }
 
     const noteDelete = (id: number) => {
