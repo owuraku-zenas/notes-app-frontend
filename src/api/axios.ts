@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export default axios.create({
 
-    baseURL: 'http://localhost:8000/api',
+    // baseURL: 'http://localhost:8000/api',
+    baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
 })
 
 axios.interceptors.response.use(undefined, error => {
