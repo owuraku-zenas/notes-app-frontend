@@ -1,0 +1,11 @@
+version: "3"
+services:
+  nginx-react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: notes-app
+    ports:
+      - 80:80
+    environment:
+      - VITE_BACKEND_BASE_URL="http://notesappbackend-env.eba-9t3pfrfj.us-west-2.elasticbeanstalk.com/api"
